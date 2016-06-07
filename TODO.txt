@@ -1,0 +1,6 @@
+Прошу прощения за не готовый полностью проект. Занимался им неделю из дозволенных трёх.
+1.Add/update/delete customers
+2.Logging/comments web actions
+3.Save ip-address
+4.war archive
+5.Test services
