@@ -12,12 +12,8 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <!-- GWT -->
-        <gwt.version>2.7.0</gwt.version>
-
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
 
     <dependencies>
         <dependency>
@@ -26,22 +22,7 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <!-- GWT -->
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-            <version>${gwt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-codeserver</artifactId>
-            <version>${gwt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-servlet</artifactId>
-            <version>${gwt.version}</version>
-        </dependency>
+
 
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -76,9 +57,45 @@
             <artifactId>spring4gwt</artifactId>
             <version>0.0.1</version>
             <scope>system</scope>
-            <systemPath>/${project.basedir}/src/main/webapp/WEB-INF/lib/spring4gwt-0.0.1.jar</systemPath>
+            <systemPath>/${basedir}/src/main/webapp/WEB-INF/lib/spring4gwt-0.0.1.jar</systemPath>
         </dependency>
 
     </dependencies>
+
+    <build>
+        <!-- Output classes directly into the webapp, so that IDEs and "mvn process-classes"
+            update them in DevMode -->
+        <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
+
+        <plugins>
+
+            <!-- GWT Maven Plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <version>2.7.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>test</goal>
+                            <!--<goal>generateAsync</goal>-->
+                        </goals>
+                    </execution>
+                </executions>
+                <!-- Plugin configuration. There are many available options, see gwt-maven-plugin
+                    documentation at codehaus.org -->
+                <configuration>
+                    <runTarget>customermanager.html</runTarget>
+                    <modules>
+                        <module>com.test.netcracker.Customermanager</module>
+                    </modules>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <finalName>customermanager</finalName>
+    </build>
+
 
 </project>

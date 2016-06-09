@@ -12,14 +12,15 @@
     <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
     <inherits name="com.google.gwt.logging.Logging"/>
     <inherits name='org.gwtbootstrap3.GwtBootstrap3'/>
+    <inherits name="com.test.netcracker.Dao"/>
 
 
     <!-- Other module inherits                                      -->
     <!-- Specify the app entry point class.                         -->
     <entry-point class='com.test.netcracker.client.CustomerManager'/>
 
-    <source path="com.test.netcracker.dao"/>
-    <source path="com.test.netcracker.model"/>
+    <source path='com.test.netcracker.dao'/>
+    <source path='com.test.netcracker.model'/>
     <!-- Specify the paths for translatable code                    -->
     <source path='client'/>
     <source path='shared'/>
@@ -27,7 +28,7 @@
     <source path='model'/>
 
     <add-linker name="xsiframe"/>
-    <!-- <set-configuration-property name="devModeRedirectEnabled" value="true"/> -->
+     <set-configuration-property name="devModeRedirectEnabled" value="true"/>
 
     <set-property name="gwt.logging.logLevel" value="INFO"/>
 
