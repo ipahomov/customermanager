@@ -133,6 +133,7 @@
         </dependency>
     </dependencies>
 
+    <!-- Helps GWT finds resources -->
     <build>
         <resources>
             <resource>
@@ -147,7 +148,6 @@
             </resource>
         </resources>
     </build>
-
 
 
 </project>
