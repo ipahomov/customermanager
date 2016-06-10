@@ -51,11 +51,11 @@
 
         <!-- spring4gwt -->
         <dependency>
-            <groupId>org.spring4gwt</groupId>
+            <groupId>com.google.code</groupId>
             <artifactId>spring4gwt</artifactId>
             <version>0.0.1</version>
             <scope>system</scope>
-            <systemPath>/${basedir}/src/main/webapp/WEB-INF/lib/spring4gwt-0.0.1.jar</systemPath>
+            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/spring4gwt-0.0.1.jar</systemPath>
         </dependency>
 
     </dependencies>
