@@ -12,4 +12,8 @@ public interface ICustomerTypeServiceAsync {
     void getCustomerTypeByCaption(String caption, AsyncCallback<CustomerType> async);
 
     void getCustomerType(Long id, AsyncCallback<CustomerType> async);
+
+    void addCustomerType(CustomerType customerType, AsyncCallback<Long> async);
+
+    void checkTypes(AsyncCallback<Void> async);
 }

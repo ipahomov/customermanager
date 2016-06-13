@@ -42,7 +42,7 @@ public class CustomerType implements Serializable {
         this.customerTypeCaption = customerTypeCaption;
     }
 
-    @OneToMany(mappedBy = "customerType")
+    @OneToMany(mappedBy = "customerType", fetch = FetchType.EAGER)
     public Set<Customer> getCustomers() {
         return customers;
     }

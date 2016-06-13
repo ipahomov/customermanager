@@ -42,11 +42,11 @@
         <div class="col-md-7">
             <h2>Search</h2>
 
-            <div id="searchBar" align="center">
+            <div id="searchBar">
                 <table>
                     <tr>
-                        <td id="lsFirstName"></td>
-                        <td id="lsLastName"></td>
+                        <td>First Name</td>
+                        <td>Last Name</td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -59,43 +59,58 @@
                 </table>
 
             </div>
+            <br>
+
             <div id="sTable"></div>
+            <br>
+
+            <div id="cellTable"></div>
+            <br>
 
         </div>
 
-
         <div class="col-md-5">
             <h2>Customer info</h2>
-
+            <div class="container"></div>
             <div class="form-group">
                 <label for="lbTitle">Title</label>
+
                 <div id="lbTitle"/>
             </div>
             <div class="form-group">
                 <label for="tbFirstName">First Name</label>
-                <input type="text" class="form-control" id="tbFirstName" placeholder="First Name">
+                <!--<input type="text" class="form-control" id="tbFirstName" placeholder="First Name">-->
+                <div id="tbFirstName"/>
             </div>
             <div class="form-group">
                 <label for="tbLastName">Last Name</label>
-                <input type="text" class="form-control" id="tbLastName" placeholder="Last Name">
+                <!--<input type="text" class="form-control" id="tbLastName" placeholder="Last Name">-->
+                <div id="tbLastName"/>
             </div>
             <div class="form-group">
                 <label for="lbTypes">Title</label>
+
                 <div id="lbTypes"/>
             </div>
+            <br>
             <div class="form-group">
                 <div id="btnSave"/>
+                <div id="btnUpdate"/>
+                <div id="btnDelete"/>
             </div>
 
         </div>
     </div>
 
 </div>
-<hr>
 
-<footer>
+<div class="container-fluid">
+    <p>Console</p>
+    <div id="console"></div>
+</div>
+<div class="modal-footer">
     <p>© 2016 com.netcracker</p>
-</footer>
+</div>
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -3,6 +3,7 @@ package com.test.netcracker.server;
 import com.test.netcracker.dao.ICustomerTypeDao;
 import com.test.netcracker.dao.exceptions.DaoException;
 import com.test.netcracker.model.CustomerType;
+import com.test.netcracker.model.TypeCaption;
 import com.test.netcracker.shared.ICustomerTypeService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class CustomerTypeService implements ICustomerTypeService {
 
     public CustomerType getCustomerTypeByCaption(String caption) {
         CustomerType type = null;
-        if (caption != null && !caption.isEmpty()) {
+        if ((caption != null) && (!caption.isEmpty())) {
             try {
                 type = customerTypeDao.getCustomerTypeByCaption(caption);
             } catch (DaoException e) {
@@ -59,4 +60,33 @@ public class CustomerTypeService implements ICustomerTypeService {
         return type;
     }
 
+    @Override
+    public Long addCustomerType(CustomerType customerType) {
+        Long id=null;
+        try {
+            id = customerTypeDao.create(customerType);
+        } catch (DaoException e) {
+            log.error("Error add type: " + e);
+        }
+        return id;
+    }
+
+    public void checkTypes(){
+        List<CustomerType> customerTypes = getAllCustomerTypes();
+        if(customerTypes.size()==0){
+            log.info("Customer types is empty. Adding...");
+            CustomerType residental = new CustomerType();
+            residental.setCustomerTypeCaption(TypeCaption.RESIDENTAL);
+            addCustomerType(residental);
+
+            CustomerType enterprise = new CustomerType();
+            enterprise.setCustomerTypeCaption(TypeCaption.ENTERPRISE);
+            addCustomerType(enterprise);
+
+            CustomerType smallMedium = new CustomerType();
+            smallMedium.setCustomerTypeCaption(TypeCaption.SMALL_MEDIUM_BUSINESS);
+            addCustomerType(smallMedium);
+            log.info("Customer types added successfully");
+        }
+    }
 }

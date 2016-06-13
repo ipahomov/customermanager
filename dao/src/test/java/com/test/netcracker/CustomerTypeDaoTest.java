@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
  * Test customers types actions
  * Created by IPahomov on 03.06.2016.
  */
-@ContextConfiguration("/beans-TestDao.xml")
+@ContextConfiguration("/beans-dao.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 public class CustomerTypeDaoTest {
@@ -36,16 +36,27 @@ public class CustomerTypeDaoTest {
         customerType.setCustomerTypeCaption(TypeCaption.RESIDENTAL);
     }
 
+    @Test
+    public void checkType(){
+        String type = "Small/Medium Business";
+        TypeCaption tc = TypeCaption.findType(type);
+        log.info(tc);
+    }
+
 
     @Test
     public void testGetAllCustomerTypes() throws Exception {
-        customerTypeDao.create(customerType);
-        customerTypeDao.create(new CustomerType());
-        customerTypeDao.create(new CustomerType());
+        //customerTypeDao.create(customerType);
+        //customerTypeDao.create(new CustomerType());
+        //customerTypeDao.create(new CustomerType());
 
         List<CustomerType> customerTypes = customerTypeDao.getAllCustomerTypes();
         log.info("All customer types: " + customerTypes);
         assertEquals("Size", 3, customerTypes.size());
+
+        for (CustomerType type : customerTypes){
+            System.out.println(type.getCustomerTypeCaption().getType());
+        }
     }
 
     @Test
@@ -87,10 +98,10 @@ public class CustomerTypeDaoTest {
 
     @Test
     public void testGetCustomerTypeByCaption() throws Exception {
-        customerTypeDao.create(customerType);
-        System.out.println(customerType.getCustomerTypeCaption());
-        System.out.println(customerType.getCustomerTypeCaption().getType());
-        CustomerType type = customerTypeDao.getCustomerTypeByCaption("Enterprise");
+        //customerTypeDao.create(customerType);
+        //System.out.println(customerType.getCustomerTypeCaption());
+        //System.out.println(customerType.getCustomerTypeCaption().getType());
+        CustomerType type = customerTypeDao.getCustomerTypeByCaption("Small/Medium Business");
         log.info(type);
     }
 }

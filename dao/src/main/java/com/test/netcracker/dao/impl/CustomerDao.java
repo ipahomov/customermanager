@@ -5,9 +5,7 @@ import com.test.netcracker.dao.ICustomerDao;
 import com.test.netcracker.dao.exceptions.DaoException;
 import com.test.netcracker.model.Customer;
 import org.hibernate.Criteria;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -33,6 +31,13 @@ public class CustomerDao extends BaseDao<Customer, Long> implements ICustomerDao
         criteria.add(Restrictions.ilike("firstNameMetaphone", firstName, MatchMode.ANYWHERE))
                 .add(Restrictions.ilike("lastNameMetaphone", lastName, MatchMode.ANYWHERE))
                 .addOrder(Order.desc("modifiedWhen"));
+
+        return (List<Customer>) criteria.list();
+    }
+
+    @Override
+    public List<Customer> findAllCustomers() throws DaoException {
+        Criteria criteria = getSession().createCriteria(Customer.class);
 
         return (List<Customer>) criteria.list();
     }

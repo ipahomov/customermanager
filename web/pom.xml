@@ -41,14 +41,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Testing -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-
         <!-- spring4gwt -->
         <dependency>
             <groupId>com.google.code</groupId>

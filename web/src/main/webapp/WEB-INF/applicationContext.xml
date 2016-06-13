@@ -15,7 +15,7 @@
 
     <context:component-scan base-package="com.test.netcracker"/>
     <context:annotation-config/>
-    <mvc:resources mapping="/assets/**" location="assets/"/>
+    <mvc:resources mapping="/assets/**" location="assets"/>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 

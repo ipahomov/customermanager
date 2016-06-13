@@ -26,39 +26,48 @@ public interface ICustomerService extends RemoteService {
     /**
      * Add Customer
      *
-     * @param customer
-     * @return
+     * @param customer to add
+     * @return id of added customer
      */
     Long addCustomer(Customer customer);
 
     /**
      * Update customer
      *
-     * @param customer
+     * @param customer to update
      */
     void updateCustomer(Customer customer);
 
     /**
      * Delete Customer
      *
-     * @param customer
+     * @param customer to delete
      */
     void deleteCustomer(Customer customer);
 
     /**
-     * Get Customer
+     * Get customer by id
      *
-     * @param id
-     * @return
+     * @param id of customer
+     * @return customer
      */
     Customer getCustomer(Long id);
 
     /**
      * Find customers by first name and last name
      *
-     * @param firstName
-     * @param lastName
-     * @return
+     * @param firstName customer
+     * @param lastName  customer
+     * @return list of matching customers
      */
     List<Customer> findCustomers(String firstName, String lastName);
+
+    /**
+     * Find all customers
+     *
+     * @return list of customers
+     */
+    List<Customer> findAllCustomers();
+
+
 }

@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
  * Test customers actions
  * Created by IPahomov on 21.05.2016.
  */
-@ContextConfiguration("/beans-TestDao.xml")
+@ContextConfiguration("/beans-dao.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 public class CustomerDaoTest {
@@ -71,10 +71,11 @@ public class CustomerDaoTest {
 
     @Test
     public void testFindLastTenCustomers() throws Exception {
-        customerDao.create(customer);
+        //customerDao.create(customer);
         List<Customer> customerList = customerDao.findLastCustomers(0, 10);
+        log.info("SIZE: " + customerList.size());
         assertNotNull(customerList);
-        log.info(customerList);
+        log.info("LIST: " + customerList);
     }
 
     @Test
@@ -92,7 +93,7 @@ public class CustomerDaoTest {
         log.info("Original customer: " + customerForUpdate);
 
         customerForUpdate.setTitle("Ms");
-        customerType.setCustomerTypeCaption(TypeCaption.SMALL);
+        customerType.setCustomerTypeCaption(TypeCaption.SMALL_MEDIUM_BUSINESS);
         customerForUpdate.setCustomerType(customerType);
         customerDao.update(customerForUpdate);
 
@@ -118,5 +119,16 @@ public class CustomerDaoTest {
         customerDao.delete(customerForDelete);
 
         assertNull(customerDao.read(id));
+    }
+
+    @Test
+    public void testFindAllCustomers() throws Exception {
+        List<Customer> customerList = customerDao.findAllCustomers();
+        log.info("LIST: " + customerList);
+        for(Customer customer : customerList){
+            System.out.println(customer.getFirstName());
+        }
+        log.info("SIZE: " + customerList.size()+" VALUES: " +  customerList.toString());
+
     }
 }

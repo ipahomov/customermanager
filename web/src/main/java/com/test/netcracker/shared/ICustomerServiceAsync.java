@@ -11,7 +11,6 @@ public interface ICustomerServiceAsync {
      *
      * @param firstResult start position
      * @param maxResult   max per page
-     * @return list of customers
      */
     void findLastCustomers(int firstResult, int maxResult, AsyncCallback<List<Customer>> async);
 
@@ -24,4 +23,6 @@ public interface ICustomerServiceAsync {
     void getCustomer(Long id, AsyncCallback<Customer> async);
 
     void findCustomers(String firstName, String lastName, AsyncCallback<List<Customer>> async);
+
+    void findAllCustomers(AsyncCallback<List<Customer>> async);
 }

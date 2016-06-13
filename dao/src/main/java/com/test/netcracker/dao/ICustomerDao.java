@@ -31,4 +31,12 @@ public interface ICustomerDao extends IBaseDao<Customer, Long> {
      * @throws DaoException
      */
     List<Customer> findCustomers(String firstName, String lastName) throws DaoException;
+
+    /**
+     * Find all customers
+     *
+     * @return list of customers
+     * @throws DaoException
+     */
+    List findAllCustomers() throws DaoException;
 }

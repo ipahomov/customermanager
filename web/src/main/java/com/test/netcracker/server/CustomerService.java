@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
+import static com.google.web.bindery.requestfactory.server.RequestFactoryServlet.getThreadLocalRequest;
 
 /**
  * Class implementing ICustomerService interface
@@ -29,6 +29,8 @@ public class CustomerService implements ICustomerService {
 
     public Long addCustomer(Customer customer) {
         Long id = null;
+        customer.setFirstName(customer.getFirstName());
+        customer.setLastName(customer.getLastName());
         customer.setFirstNameMetaphone(metaphoneEncodeName(customer.getFirstName()));
         customer.setLastNameMetaphone(metaphoneEncodeName(customer.getLastName()));
         customer.setModifiedWhen(new Date());
@@ -76,12 +78,25 @@ public class CustomerService implements ICustomerService {
         return customerList;
     }
 
+    @Override
+    public List<Customer> findAllCustomers() {
+        List<Customer> customers = Collections.EMPTY_LIST;
+        try {
+            customers = customerDao.findAllCustomers();
+        } catch (DaoException e) {
+            log.error("Error find all customers: " + e);
+        }
+        log.info(customers);
+        return customers;
+    }
+
     public void deleteCustomer(Customer customer) {
         try {
             customerDao.delete(customer);
         } catch (DaoException e) {
             log.error("Error delete customer: " + e);
         }
+        log.info("Deleted customer: " + customer);
     }
 
     public String metaphoneEncodeName(String name) {
@@ -103,6 +118,12 @@ public class CustomerService implements ICustomerService {
         } catch (DaoException e) {
             log.error("Error get limeted list of customers: " + e);
         }
+        log.info(customerList);
         return customerList;
+    }
+
+    public String getIPAddress(){
+        String ip = getThreadLocalRequest().getRemoteHost();
+        return ip;
     }
 }

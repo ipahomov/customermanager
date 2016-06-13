@@ -1,11 +1,8 @@
 package com.test.netcracker.model;
 
-import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -51,9 +48,9 @@ public class Customer implements Serializable {
         this.title = title;
     }
 
-    @NotNull(message = "Input first name")
+    /*@NotNull(message = "Input first name")
     @Length(min = 2, message = "Minimum 2 letters")
-    @Pattern(regexp = "^[A-Z]+[a-z]+$", message = "First name must be alphanumeric with no spaces and first capital")
+    @Pattern(regexp = "^[A-Z]+[a-z]+$", message = "First name must be alphanumeric with no spaces and first capital")*/
     @Column(name = "FIRST_NAME", length = 50)
     public String getFirstName() {
         return firstName;
@@ -72,9 +69,9 @@ public class Customer implements Serializable {
         this.firstNameMetaphone = firstNameMetaphone;
     }
 
-    @NotNull(message = "Input Last name")
+    /*@NotNull(message = "Input Last name")
     @Length(min = 2, message = "Minimum 2 letters")
-    @Pattern(regexp = "^[A-Z]+[a-z]+$", message = "Last name must be alphanumeric with no spaces and first capital")
+    @Pattern(regexp = "^[A-Z]+[a-z]+$", message = "Last name must be alphanumeric with no spaces and first capital")*/
     @Column(name = "LAST_NAME", length = 50)
     public String getLastName() {
         return lastName;
@@ -105,7 +102,7 @@ public class Customer implements Serializable {
     }
 
     @JoinColumn(name = "TYPE")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     public CustomerType getCustomerType() {
         return customerType;
     }
