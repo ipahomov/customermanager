@@ -69,5 +69,11 @@ public interface ICustomerService extends RemoteService {
      */
     List<Customer> findAllCustomers();
 
+    /**
+     * Get client ip
+     * @return ip
+     */
+    String getIPAddress();
+
 
 }

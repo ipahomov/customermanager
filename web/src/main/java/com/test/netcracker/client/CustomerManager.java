@@ -7,32 +7,22 @@ import com.google.gwt.user.client.ui.RootPanel;
 import java.util.logging.Logger;
 
 /**
- * Start point of web-app. Contains main operations.
+ * Start point of web-app. Contains main console.
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class CustomerManager implements EntryPoint {
     private static final Logger log = Logger.getLogger("EntryPoint");
-
     public static Label console = new Label();
 
 
     public void onModuleLoad() {
         RootPanel.get("console").add(console);
 
-        /**
-         * SearchBar for search customers and display list of results into a table
-         */
+        //SearchBar for search customers and display list of results into a table
         CustomerSearch.init();
         log.info("Search initialized");
 
-        /**
-         * Form for add/update/delete customers
-         */
-        CustomerForm.init();
-        log.info("Form initialized");
-
-        //refreshTable();
-
+        CustomerSearch.refreshTable();
 
     }
 

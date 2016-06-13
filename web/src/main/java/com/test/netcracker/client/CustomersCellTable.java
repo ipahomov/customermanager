@@ -27,9 +27,8 @@ public class CustomersCellTable extends CellTable<Customer> {
 
     List<Customer> customers = Collections.EMPTY_LIST;
     private Customer customer;
-    //ProvidesKey<Customer> keyProvider;
 
-    public CustomersCellTable(ProvidesKey<Customer> keyProvider){
+    public CustomersCellTable(ProvidesKey<Customer> keyProvider) {
         super(keyProvider);
         this.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
 
@@ -82,15 +81,11 @@ public class CustomersCellTable extends CellTable<Customer> {
 
     }
 
-    public List<Customer> getCustomers() {
-        return customers;
-    }
-
     public void setCustomers(List<Customer> customers) {
         this.customers = customers;
 
         this.setRowCount(this.customers.size(), true);
-        this.setRowData(0,customers);
+        this.setRowData(0, customers);
         log.info("List of customers to cell table: " + customers);
     }
 

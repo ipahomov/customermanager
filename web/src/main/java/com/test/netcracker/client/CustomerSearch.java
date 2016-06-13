@@ -19,11 +19,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Class search customers and fill cell table.
+ * Send selected customer to customer form.
  * Created by IPahomov on 11.06.2016.
  */
 public class CustomerSearch {
     private static final Logger log = Logger.getLogger("CustomerSearch");
     private final static ICustomerServiceAsync customerService = GWT.create(ICustomerService.class);
+    private static CustomerFormCustom customerForm = new CustomerFormCustom();
+    private final static int MAX_RESULTS = 10; // per page
 
     public static void init() {
 
@@ -44,17 +48,16 @@ public class CustomerSearch {
                     fNames.add(customer.getFirstName());
                     lNames.add(customer.getLastName());
                 }
-
-                log.info(fNames.toString());
-                log.info(lNames.toString());
             }
         });
 
         // add oracles to suggest boxes
+        //first names
         final SuggestBox tbSearchFirstName = new SuggestBox(fNames);
         RootPanel.get("tbsFirstName").add(tbSearchFirstName);
         tbSearchFirstName.setFocus(true);
 
+        // last names
         final SuggestBox tbSearchLastName = new SuggestBox(lNames);
         RootPanel.get("tbsLastName").add(tbSearchLastName);
 
@@ -65,7 +68,7 @@ public class CustomerSearch {
                 String firstName = tbSearchFirstName.getValue();
                 String lastName = tbSearchLastName.getValue();
 
-                if((firstName!=null)&&(lastName!=null)&&(!firstName.isEmpty())&&(!lastName.isEmpty())){
+                if ((firstName != null) && (lastName != null) && (!firstName.isEmpty()) && (!lastName.isEmpty())) {
                     customerService.findCustomers(firstName, lastName, new AsyncCallback<List<Customer>>() {
                         @Override
                         public void onFailure(Throwable throwable) {
@@ -78,8 +81,6 @@ public class CustomerSearch {
                             fillCellTable(customerList);
                         }
                     });
-
-
                 }
 
             }
@@ -92,16 +93,22 @@ public class CustomerSearch {
             public void onClick(ClickEvent event) {
                 tbSearchFirstName.setText("");
                 tbSearchLastName.setText("");
+                refreshTable();
             }
         });
         RootPanel.get("bsClear").add(bClear);
 
-        // fill table
-        customerService.findLastCustomers(0, 10, new AsyncCallback<List<Customer>>() {
+        refreshTable();
+
+    }
+
+    // refresh table
+    public static void refreshTable() {
+        customerService.findLastCustomers(0, MAX_RESULTS, new AsyncCallback<List<Customer>>() {
             @Override
             public void onFailure(Throwable throwable) {
-                Window.alert("Error get last customers");
-                log.log(Level.SEVERE, throwable.getMessage());
+                CustomerManager.console.setText("Error find last customers");
+                log.log(Level.SEVERE, "Error find last customers" + throwable.getMessage());
             }
 
             @Override
@@ -109,10 +116,9 @@ public class CustomerSearch {
                 fillCellTable(customerList);
             }
         });
-
-
     }
 
+    // key provider to trace customer by id
     private static final ProvidesKey<Customer> KEY_PROVIDER =
             new ProvidesKey<Customer>() {
                 @Override
@@ -121,9 +127,10 @@ public class CustomerSearch {
                 }
             };
 
+    // cell table
     final static CustomersCellTable customersCellTable = new CustomersCellTable(KEY_PROVIDER);
-    private static void fillCellTable(List<Customer> customerList){
-        customersCellTable.redraw();
+
+    private static void fillCellTable(List<Customer> customerList) {
         customersCellTable.setCustomers(customerList);
 
         // Add a selection model to handle user selection.
@@ -135,20 +142,13 @@ public class CustomerSearch {
                     public void onSelectionChange(SelectionChangeEvent event) {
                         Customer selected = selectionModel.getSelectedObject();
                         if (selected != null) {
-                            CustomerManager.console.setText("You selected " + selected.getFirstName()+ " " + selected.getLastName());
-                            CustomerForm.setCustomer(selected);
+                            CustomerManager.console.setText("You selected " + selected.getFirstName() + " " + selected.getLastName());
+                            customerForm.setCustomer(selected);
                         }
                     }
                 });
         RootPanel.get("cellTable").add(customersCellTable);
-
-        //final SelectionModel<Customer> selectionModel1 =  new MultiSelectionModel<Customer>(KEY_PROVIDER);
-        //customersCellTable.setSelectionModel(selectionModel, DefaultSelectionEventManager.<Customer> createCheckboxManager());
-
     }
-
-
-
 
 
 }

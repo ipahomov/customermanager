@@ -25,4 +25,6 @@ public interface ICustomerServiceAsync {
     void findCustomers(String firstName, String lastName, AsyncCallback<List<Customer>> async);
 
     void findAllCustomers(AsyncCallback<List<Customer>> async);
+
+    void getIPAddress(AsyncCallback<String> async);
 }
