@@ -98,7 +98,6 @@ public class CustomerSearch {
         });
         RootPanel.get("bsClear").add(bClear);
 
-        refreshTable();
 
     }
 
